@@ -4,7 +4,7 @@
   "description": "Simple HTTP CLI util",
   "main": "index.js",
   "bin": {
-    "aqui": "node ./bin/aqui.js"
+    "aqui": "bin/aqui.js"
   },
   "scripts": {
     "lint": "standard",
