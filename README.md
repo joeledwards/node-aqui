@@ -1,5 +1,8 @@
 # aquí
 
+[![Build Status][travis-image]][travis-url]
+[![NPM version][npm-image]][npm-url]
+
 Simple CLI HTTP client aimed at maximum human friendliness.
 
 ## Installation
@@ -21,9 +24,8 @@ $ aqui get http://httpbin.org/get?agent=aqui -h bearer:none
     "Bearer": "none",
     "Connection": "close",
     "Host": "httpbin.org",
-    "User-Agent": "axios/0.17.1"
+    "User-Agent": "aqui/1.4.0"
   },
-  "origin": "71.39.37.51",
   "url": "http://httpbin.org/get?agent=aqui"
 }
 
@@ -42,3 +44,8 @@ GET http://httpbin.org/get?agent=aqui
 
 [200] OK (199.412 ms)
 ```
+
+[travis-url]: https://travis-ci.org/joeledwards/node-aqui
+[travis-image]: https://img.shields.io/travis/joeledwards/node-aqui/master.svg
+[npm-url]: https://www.npmjs.com/package/aqui
+[npm-image]: https://img.shields.io/npm/v/aqui.svg
