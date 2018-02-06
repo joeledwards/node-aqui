@@ -1,7 +1,7 @@
 {
   "name": "aqui",
   "version": "1.0.1",
-  "description": "Simple HTTP CLI util",
+  "description": "Simple CLI HTTP client",
   "main": "index.js",
   "bin": {
     "aqui": "bin/aqui.js"
