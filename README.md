@@ -45,6 +45,21 @@ GET http://httpbin.org/get?agent=aqui
 [200] OK (199.412 ms)
 ```
 
+## Usage
+```
+$ aqui --help
+aqui <command>
+
+Commands:
+  aqui get <url>      simple http GET against a URL
+  aqui head <url>     simple http HEAD against a URL
+  aqui options <url>  simple http OPTIONS against a URL
+
+Options:
+  --version  Show version number                                       [boolean]
+  --help     Show help                                                 [boolean]
+```
+
 [travis-url]: https://travis-ci.org/joeledwards/node-aqui
 [travis-image]: https://img.shields.io/travis/joeledwards/node-aqui/master.svg
 [npm-url]: https://www.npmjs.com/package/aqui
