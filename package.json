@@ -1,6 +1,6 @@
 {
   "name": "aqui",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Simple CLI HTTP client",
   "main": "index.js",
   "bin": {
