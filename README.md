@@ -3,7 +3,7 @@
 [![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 
-Simple CLI HTTP client aimed at maximum human friendliness.
+Simple CLI HTTP tools aimed at maximum human friendliness.
 
 ## Installation
 
@@ -53,11 +53,13 @@ aqui <command>
 Commands:
   aqui get <url>      simple http GET against a URL
   aqui head <url>     simple http HEAD against a URL
+  aqui ip             Fetch public IP info for this caller
   aqui options <url>  simple http OPTIONS against a URL
 
 Options:
   --version  Show version number                                       [boolean]
   --help     Show help                                                 [boolean]
+
 ```
 
 [travis-url]: https://travis-ci.org/joeledwards/node-aqui
