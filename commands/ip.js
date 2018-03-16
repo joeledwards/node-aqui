@@ -32,6 +32,7 @@ function builder (yargs) {
 
 async function handler ({cli, geo, json, prettyJson}) {
   const {blue, green, orange, purple, red, yellow, emoji} = require('@buzuli/color')
+  const buzJson = require('@buzuli/json')
   const axios = require('axios')
 
   const options = {
@@ -64,8 +65,11 @@ async function handler ({cli, geo, json, prettyJson}) {
           : ''
         console.log(`${ip}${geoInfo}`)
       } else if (json || prettyJson) {
-        const indent = prettyJson ? 2 : null
-        console.log(geo ? JSON.stringify(data, null, indent) : JSON.stringify({ip}, null, indent))
+        if (prettyJson) {
+          console.log(buzJson(geo ? data : {ip}))
+        } else {
+          console.log(JSON.stringify(geo ? data : {ip}))
+        }
       } else {
         console.log(`IP Address : ${green(ip)}`)
         if (geo) {
