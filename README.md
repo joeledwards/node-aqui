@@ -11,8 +11,10 @@ Simple CLI HTTP tools aimed at maximum human friendliness.
 $ npm i -g aqui
 ```
 
-## Example
+## Examples
 
+HTTP GET requet
+ 
 ```shell
 $ aqui get http://httpbin.org/get?agent=aqui -h bearer:none
 {
@@ -24,25 +26,51 @@ $ aqui get http://httpbin.org/get?agent=aqui -h bearer:none
     "Bearer": "none",
     "Connection": "close",
     "Host": "httpbin.org",
-    "User-Agent": "aqui/1.4.0"
+    "User-Agent": "aqui/1.10.1"
   },
+  "origin": "152.234.163.335",
   "url": "http://httpbin.org/get?agent=aqui"
 }
 
 access-control-allow-credentials : true
      access-control-allow-origin : *
                       connection : close
-                  content-length : 300
+                  content-length : 299
                     content-type : application/json
-                            date : Tue, 06 Feb 2018 07:06:23 GMT
+                            date : Tue, 20 Mar 2018 22:27:24 GMT
                           server : meinheld/0.6.1
                              via : 1.1 vegur
                     x-powered-by : Flask
-                x-processed-time : 0.000999927520752
+                x-processed-time : 0
 
 GET http://httpbin.org/get?agent=aqui
 
-[200] OK (199.412 ms)
+    Accept : application/json, text/plain, */*
+Connection : close
+      Host : httpbin.org
+User-Agent : aqui/1.10.1
+    bearer : none
+
+[200] OK (295.778 ms)
+```
+
+Geo IP query
+
+```shell
+$ aqui ip -gJ
+{
+  "ip": "152.234.163.335",
+  "country_code": "US",
+  "country_name": "United States",
+  "region_code": "OR",
+  "region_name": "Oregon",
+  "city": "Boardman",
+  "zip_code": "97818",
+  "time_zone": "America/Los_Angeles",
+  "latitude": 45.7788,
+  "longitude": -119.529,
+  "metro_code": 810
+}
 ```
 
 ## Usage
