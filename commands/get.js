@@ -3,7 +3,7 @@ const {get: handler} = require('../lib/http')
 
 module.exports = {
   command: 'get <url>',
-  desc: 'simple http GET against a URL',
+  desc: 'HTTP GET against a URL',
   builder,
   handler
 }

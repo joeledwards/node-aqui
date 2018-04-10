@@ -3,7 +3,7 @@ const {head: handler} = require('../lib/http')
 
 module.exports = {
   command: 'head <url>',
-  desc: 'simple http HEAD against a URL',
+  desc: 'HTTP HEAD against a URL',
   builder,
   handler
 }
