@@ -26,7 +26,7 @@ $ aqui get http://httpbin.org/get?agent=aqui -h bearer:none
     "Bearer": "none",
     "Connection": "close",
     "Host": "httpbin.org",
-    "User-Agent": "aqui/1.10.1"
+    "User-Agent": "aqui/1.11.1"
   },
   "origin": "152.234.163.335",
   "url": "http://httpbin.org/get?agent=aqui"
@@ -37,7 +37,7 @@ access-control-allow-credentials : true
                       connection : close
                   content-length : 299
                     content-type : application/json
-                            date : Tue, 20 Mar 2018 22:27:24 GMT
+                            date : Thu, 12 Apr 2018 05:25:46 GMT
                           server : meinheld/0.6.1
                              via : 1.1 vegur
                     x-powered-by : Flask
@@ -48,10 +48,10 @@ GET http://httpbin.org/get?agent=aqui
     Accept : application/json, text/plain, */*
 Connection : close
       Host : httpbin.org
-User-Agent : aqui/1.10.1
+User-Agent : aqui/1.11.1
     bearer : none
 
-[200] OK (295.778 ms)
+[200] OK (193.689 ms)
 ```
 
 Geo IP query
@@ -79,10 +79,13 @@ $ aqui --help
 aqui <command>
 
 Commands:
-  aqui get <url>      simple http GET against a URL
-  aqui head <url>     simple http HEAD against a URL
-  aqui ip             Fetch public IP info for this caller
-  aqui options <url>  simple http OPTIONS against a URL
+  aqui delete <url> [payload]  HTTP DELETE against a URL
+  aqui get <url>               HTTP GET against a URL
+  aqui head <url>              HTTP HEAD against a URL
+  aqui ip                      Fetch public IP info for this caller
+  aqui options <url>           HTTP OPTIONS against a URL
+  aqui post <url> [payload]    HTTP POST against a URL
+  aqui put <url> [payload]     HTTP PUT against a URL
 
 Options:
   --version  Show version number                                       [boolean]
