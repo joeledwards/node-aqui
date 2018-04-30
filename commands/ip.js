@@ -9,8 +9,13 @@ function builder (yargs) {
   yargs
   .options('cli', {
     type: 'boolean',
-    desc: 'output in a single line for easy CLI use (overrides -j and -J)',
+    desc: 'output in a single line for easy CLI use',
     alias: ['c']
+  })
+  .options('cli-pretty', {
+    type: 'boolean',
+    desc: 'output in a single line (but with color)',
+    alias: ['C']
   })
   .options('json', {
     type: 'boolean',
@@ -19,25 +24,40 @@ function builder (yargs) {
   })
   .options('pretty-json', {
     type: 'boolean',
-    desc: 'output in nicely indented (human readable) JSON',
+    desc: 'output pretty JSON (indented and colorized)',
     alias: ['J']
+  })
+  .options('raw', {
+    type: 'boolean',
+    desc: 'output the raw JSON output from the Geo API (implies -g)',
+    alias: ['r']
+  })
+  .options('pretty-raw', {
+    type: 'boolean',
+    desc: 'output pretty version of the raw JSON from the Geo API (implies -g)',
+    alias: ['R']
   })
   .options('geo', {
     type: 'boolean',
     desc: 'pull geo IP info also',
-    default: false,
     alias: ['g']
   })
 }
 
-async function handler ({cli, geo, json, prettyJson}) {
-  const {blue, green, orange, purple, red, yellow, emoji} = require('@buzuli/color')
+async function handler ({cli, cliPretty, geo, json, prettyJson, raw, prettyRaw}) {
+  const {blue, green, grey, orange, purple, red, yellow, emoji} = require('@buzuli/color')
   const buzJson = require('@buzuli/json')
   const axios = require('axios')
 
+  function colorIt(preferredColor, value) {
+    return ((value === 'unknown') ? grey : preferredColor)(value)
+  }
+
+  const {url, decode} = ipApi()
+
   const options = {
     method: 'GET',
-    url: 'https://freegeoip.net/json',
+    url,
     validateStatus: status => true
   }
 
@@ -45,42 +65,52 @@ async function handler ({cli, geo, json, prettyJson}) {
     const {status, data} = await axios(options)
 
     if (status === 200) {
+      const record = decode(data)
       const {
         ip,
-        country_code: countryCode,
-        country_name: countryName,
-        region_code: regionCode,
-        region_name: regionName,
+        as,
+        isp,
+        countryCode,
+        countryName,
+        regionCode,
+        regionName,
         city,
-        zip_code: zipCode,
-        time_zone: timeZone,
+        zipCode,
+        metroCode,
+        timeZone,
         latitude,
-        longitude,
-        metro_code: metroCode
-      } = data
+        longitude
+      } = record
 
       if (cli) {
         const geoInfo = geo
           ? ` ${countryCode},${regionCode},${zipCode} ${latitude},${longitude}`
           : ''
         console.log(`${ip}${geoInfo}`)
-      } else if (json || prettyJson) {
-        if (prettyJson) {
-          console.log(buzJson(geo ? data : {ip}))
+      } else if (cliPretty) {
+        const geoInfo = geo
+          ? ` ${orange(countryCode)},${yellow(regionCode)},${blue(zipCode)} ${grey(latitude)},${grey(longitude)}`
+          : ''
+        console.log(`${green(ip)}${geoInfo}`)
+      } else if (json || prettyJson || raw || prettyRaw) {
+        if (prettyJson || prettyRaw) {
+          console.log(buzJson(prettyRaw ? data : geo ? record : {ip}))
         } else {
-          console.log(JSON.stringify(geo ? data : {ip}))
+          console.log(JSON.stringify(raw ? data : geo ? record : {ip}))
         }
       } else {
         console.log(`IP Address : ${green(ip)}`)
         if (geo) {
-          console.log(`   Country : ${blue(countryName)} [${yellow(countryCode)}]`)
-          console.log(`    Region : ${blue(regionName)} [${yellow(regionCode)}]`)
-          console.log(`      City : ${blue(city)}`)
-          console.log(`  Zip Code : ${orange(zipCode)}`)
-          console.log(`Metro Code : ${orange(metroCode)}`)
-          console.log(`  Latitude : ${orange(latitude)}`)
-          console.log(` Longitude : ${orange(longitude)}`)
-          console.log(` Time Zone : ${purple(timeZone)}`)
+          console.log(`        AS : ${colorIt(yellow, as)}`)
+          console.log(`       ISP : ${colorIt(yellow, isp)}`)
+          console.log(`   Country : ${colorIt(blue, countryName)} [${colorIt(yellow, countryCode)}]`)
+          console.log(`    Region : ${colorIt(blue,regionName)} [${colorIt(yellow, regionCode)}]`)
+          console.log(`      City : ${colorIt(blue, city)}`)
+          console.log(`  Zip Code : ${colorIt(orange, zipCode)}`)
+          console.log(`Metro Code : ${colorIt(orange, metroCode)}`)
+          console.log(`  Latitude : ${colorIt(orange, latitude)}`)
+          console.log(` Longitude : ${colorIt(orange, longitude)}`)
+          console.log(` Time Zone : ${colorIt(purple, timeZone)}`)
         }
       }
     } else {
@@ -104,5 +134,88 @@ async function handler ({cli, geo, json, prettyJson}) {
       ? status > 199
       : green
       : blue)(status)
+  }
+}
+
+// New API
+function ipApi () {
+  return {
+    url: 'http://ip-api.com/json',
+    decode: decodeIpApi
+  }
+}
+function decodeIpApi (record) {
+  const {
+    as,
+    city,
+    country: countryName,
+    countryCode,
+    isp,
+    lat: latitude,
+    lon: longitude,
+    org,
+    query: ip,
+    region: regionCode,
+    regionName: regionName,
+    timezone: timeZone,
+    zip: zipCode
+  } = record
+
+  return {
+    ip,
+    as,
+    isp,
+    org,
+    countryCode,
+    countryName,
+    regionCode,
+    regionName,
+    city,
+    zipCode,
+    metroCode: 'unknown',
+    timeZone,
+    latitude,
+    longitude,
+    isp
+  }
+}
+
+// Free GeoIP (the original supplier, less accurate, ends July 2018)
+function freeGeoIp () {
+  return {
+    url: 'https://freegeoip.net/json',
+    decode: decodeFreeGeoIp
+  }
+}
+function decodeFreeGeoIp (record) {
+  const {
+    ip,
+    country_code: countryCode,
+    country_name: countryName,
+    region_code: regionCode,
+    region_name: regionName,
+    city,
+    zip_code: zipCode,
+    metro_code: metroCode,
+    time_zone: timeZone,
+    latitude,
+    longitude
+  } = record
+
+  return {
+    ip,
+    as: 'unknown',
+    isp: 'unknown',
+    org: 'unknown',
+    countryCode,
+    countryName,
+    regionCode,
+    regionName,
+    city,
+    zipCode,
+    metroCode,
+    timeZone,
+    latitude,
+    longitude
   }
 }
