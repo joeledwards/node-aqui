@@ -7,41 +7,41 @@ module.exports = {
 
 function builder (yargs) {
   yargs
-  .options('cli', {
-    type: 'boolean',
-    desc: 'output in a single line for easy CLI use',
-    alias: ['c']
-  })
-  .options('cli-pretty', {
-    type: 'boolean',
-    desc: 'output in a single line (but with color)',
-    alias: ['C']
-  })
-  .options('json', {
-    type: 'boolean',
-    desc: 'output in JSON format',
-    alias: ['j']
-  })
-  .options('pretty-json', {
-    type: 'boolean',
-    desc: 'output pretty JSON (indented and colorized)',
-    alias: ['J']
-  })
-  .options('raw', {
-    type: 'boolean',
-    desc: 'output the raw JSON output from the Geo API (implies -g)',
-    alias: ['r']
-  })
-  .options('pretty-raw', {
-    type: 'boolean',
-    desc: 'output pretty version of the raw JSON from the Geo API (implies -g)',
-    alias: ['R']
-  })
-  .options('geo', {
-    type: 'boolean',
-    desc: 'pull geo IP info also',
-    alias: ['g']
-  })
+    .options('cli', {
+      type: 'boolean',
+      desc: 'output in a single line for easy CLI use',
+      alias: ['c']
+    })
+    .options('cli-pretty', {
+      type: 'boolean',
+      desc: 'output in a single line (but with color)',
+      alias: ['C']
+    })
+    .options('json', {
+      type: 'boolean',
+      desc: 'output in JSON format',
+      alias: ['j']
+    })
+    .options('pretty-json', {
+      type: 'boolean',
+      desc: 'output pretty JSON (indented and colorized)',
+      alias: ['J']
+    })
+    .options('raw', {
+      type: 'boolean',
+      desc: 'output the raw JSON output from the Geo API (implies -g)',
+      alias: ['r']
+    })
+    .options('pretty-raw', {
+      type: 'boolean',
+      desc: 'output pretty version of the raw JSON from the Geo API (implies -g)',
+      alias: ['R']
+    })
+    .options('geo', {
+      type: 'boolean',
+      desc: 'pull geo IP info also',
+      alias: ['g']
+    })
 }
 
 async function handler ({cli, cliPretty, geo, json, prettyJson, raw, prettyRaw}) {
@@ -49,7 +49,7 @@ async function handler ({cli, cliPretty, geo, json, prettyJson, raw, prettyRaw})
   const buzJson = require('@buzuli/json')
   const axios = require('axios')
 
-  function colorIt(preferredColor, value) {
+  function colorIt (preferredColor, value) {
     return ((value === 'unknown') ? grey : preferredColor)(value)
   }
 
@@ -104,7 +104,7 @@ async function handler ({cli, cliPretty, geo, json, prettyJson, raw, prettyRaw})
           console.log(`        AS : ${colorIt(yellow, as)}`)
           console.log(`       ISP : ${colorIt(yellow, isp)}`)
           console.log(`   Country : ${colorIt(blue, countryName)} [${colorIt(yellow, countryCode)}]`)
-          console.log(`    Region : ${colorIt(blue,regionName)} [${colorIt(yellow, regionCode)}]`)
+          console.log(`    Region : ${colorIt(blue, regionName)} [${colorIt(yellow, regionCode)}]`)
           console.log(`      City : ${colorIt(blue, city)}`)
           console.log(`  Zip Code : ${colorIt(orange, zipCode)}`)
           console.log(`Metro Code : ${colorIt(orange, metroCode)}`)
@@ -128,12 +128,12 @@ async function handler ({cli, cliPretty, geo, json, prettyJson, raw, prettyRaw})
     return (status > 499
       ? yellow
       : status > 399
-      ? red
-      : status > 299
-      ? purple
-      ? status > 199
-      : green
-      : blue)(status)
+        ? red
+        : status > 299
+          ? purple
+            ? status > 199
+            : green
+          : blue)(status)
   }
 }
 
@@ -156,7 +156,7 @@ function decodeIpApi (record) {
     org,
     query: ip,
     region: regionCode,
-    regionName: regionName,
+    regionName,
     timezone: timeZone,
     zip: zipCode
   } = record
@@ -173,47 +173,6 @@ function decodeIpApi (record) {
     city,
     zipCode,
     metroCode: 'unknown',
-    timeZone,
-    latitude,
-    longitude,
-    isp
-  }
-}
-
-// Free GeoIP (the original supplier, less accurate, ends July 2018)
-function freeGeoIp () {
-  return {
-    url: 'https://freegeoip.net/json',
-    decode: decodeFreeGeoIp
-  }
-}
-function decodeFreeGeoIp (record) {
-  const {
-    ip,
-    country_code: countryCode,
-    country_name: countryName,
-    region_code: regionCode,
-    region_name: regionName,
-    city,
-    zip_code: zipCode,
-    metro_code: metroCode,
-    time_zone: timeZone,
-    latitude,
-    longitude
-  } = record
-
-  return {
-    ip,
-    as: 'unknown',
-    isp: 'unknown',
-    org: 'unknown',
-    countryCode,
-    countryName,
-    regionCode,
-    regionName,
-    city,
-    zipCode,
-    metroCode,
     timeZone,
     latitude,
     longitude
