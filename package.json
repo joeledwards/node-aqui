@@ -2,6 +2,7 @@
   "name": "aqui",
   "version": "2.0.1",
   "description": "Simple CLI HTTP utilities",
+  "repository": "github:joeledwards/node-aqui",
   "main": "index.js",
   "bin": {
     "aqui": "bin/aqui.js"
