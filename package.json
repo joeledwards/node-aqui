@@ -1,7 +1,8 @@
 {
   "name": "aqui",
-  "version": "2.0.1",
+  "version": "3.0.2",
   "description": "Simple CLI HTTP utilities",
+  "repository": "github:joeledwards/node-aqui",
   "main": "index.js",
   "bin": {
     "aqui": "bin/aqui.js"
@@ -18,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@buzuli/color": "^1.2.0",
-    "@buzuli/hexdump": "^1.0.4",
+    "@buzuli/hexdump": "^1.1.0",
     "@buzuli/json": "^1.1.3",
     "axios": "^0.18.0",
     "durations": "^3.4.1",
