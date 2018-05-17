@@ -1,6 +1,6 @@
 {
   "name": "aqui",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "Simple CLI HTTP utilities",
   "repository": "github:joeledwards/node-aqui",
   "main": "index.js",
