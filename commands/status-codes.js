@@ -1,5 +1,5 @@
 module.exports = {
-  command: 'status-codes',
+  command: 'status-codes [filter]',
   desc: 'list the http status codes',
   builder,
   handler
@@ -7,6 +7,11 @@ module.exports = {
 
 function builder (yargs) {
   yargs
+    .option('filter', {
+      type: 'string',
+      desc: 'regex filter for matches on the status and message',
+      coerce: filter => new RegExp(filter, 'i')
+    })
     .option('include-unofficial', {
       type: 'boolean',
       default: false,
@@ -15,13 +20,20 @@ function builder (yargs) {
     })
 }
 
-function handler ({includeUnofficial}) {
+function reg (regex) {
+  new RegExp(regex)
+}
+
+function handler ({filter, includeUnofficial}) {
   const c = require('@buzuli/color')
 
   console.log(`HTTP Status Codes`)
 
   statusCodes()
     .filter(({unofficial}) => !unofficial || includeUnofficial)
+    .filter(({code, description}) => {
+      return !filter || `${code}`.match(filter) || description.match(filter)
+    })
     .forEach(({code, unofficial, description}) => {
       console.log(`  ${colorCode(code)} ${description} ${unofficial ? '❄️ ' : ''}`)
     })
