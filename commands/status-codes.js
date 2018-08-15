@@ -20,10 +20,6 @@ function builder (yargs) {
     })
 }
 
-function reg (regex) {
-  new RegExp(regex)
-}
-
 function handler ({filter, includeUnofficial}) {
   const c = require('@buzuli/color')
 
