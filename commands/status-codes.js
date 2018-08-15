@@ -18,15 +18,23 @@ function builder (yargs) {
       desc: 'include unofficial (non-standard) codes',
       alias: 'u'
     })
+    .option('only-unofficial', {
+      type: 'boolean',
+      default: false,
+      desc: 'only show unofficial (non-standard) codes',
+      alias: 'U'
+    })
 }
 
-function handler ({filter, includeUnofficial}) {
+function handler ({filter, includeUnofficial, onlyUnofficial}) {
   const c = require('@buzuli/color')
 
   console.log(`HTTP Status Codes`)
 
   statusCodes()
-    .filter(({unofficial}) => !unofficial || includeUnofficial)
+    .filter(({unofficial}) => {
+      return onlyUnofficial ? unofficial : !unofficial || includeUnofficial
+    })
     .filter(({code, description}) => {
       return !filter || `${code}`.match(filter) || description.match(filter)
     })
