@@ -22,7 +22,7 @@ function builder (yargs) {
       desc: 'output in JSON format',
       alias: ['j']
     })
-    .options('pretty-json', {
+    .options('json-pretty', {
       type: 'boolean',
       desc: 'output pretty JSON (indented and colorized)',
       alias: ['J']
@@ -32,7 +32,7 @@ function builder (yargs) {
       desc: 'output the raw JSON output from the Geo API (implies -g)',
       alias: ['r']
     })
-    .options('pretty-raw', {
+    .options('raw-pretty', {
       type: 'boolean',
       desc: 'output pretty version of the raw JSON from the Geo API (implies -g)',
       alias: ['R']
@@ -44,7 +44,7 @@ function builder (yargs) {
     })
 }
 
-async function handler ({cli, cliPretty, geo, json, prettyJson, raw, prettyRaw}) {
+async function handler ({cli, cliPretty, geo, json, jsonPretty, raw, rawPretty}) {
   const {blue, green, grey, orange, purple, red, yellow, emoji} = require('@buzuli/color')
   const buzJson = require('@buzuli/json')
   const axios = require('axios')
@@ -92,9 +92,9 @@ async function handler ({cli, cliPretty, geo, json, prettyJson, raw, prettyRaw})
           ? ` ${orange(countryCode)},${yellow(regionCode)},${blue(zipCode)} ${grey(latitude)},${grey(longitude)}`
           : ''
         console.log(`${green(ip)}${geoInfo}`)
-      } else if (json || prettyJson || raw || prettyRaw) {
-        if (prettyJson || prettyRaw) {
-          console.log(buzJson(prettyRaw ? data : geo ? record : {ip}))
+      } else if (json || jsonPretty || raw || rawPretty) {
+        if (jsonPretty || rawPretty) {
+          console.log(buzJson(rawPretty ? data : geo ? record : {ip}))
         } else {
           console.log(JSON.stringify(raw ? data : geo ? record : {ip}))
         }

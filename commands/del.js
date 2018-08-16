@@ -1,4 +1,4 @@
-const builder = require('../lib/build')()
+const {write: builder} = require('../lib/build')
 const {del: handler} = require('../lib/http')
 
 module.exports = {

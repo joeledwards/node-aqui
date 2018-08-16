@@ -1,4 +1,4 @@
-const builder = require('../lib/build')()
+const {read: builder} = require('../lib/build')
 const {get: handler} = require('../lib/http')
 
 module.exports = {
