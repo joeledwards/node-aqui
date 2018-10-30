@@ -7,7 +7,7 @@ module.exports = {
 
 function builder (yargs) {
   yargs
-    .option('filter', {
+    .positional('filter', {
       type: 'string',
       desc: 'regex filter for matches on the status and message',
       coerce: filter => new RegExp(filter, 'i')
