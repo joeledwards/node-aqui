@@ -11,6 +11,10 @@ Simple CLI HTTP tools aimed at maximum human friendliness.
 $ npm i -g aqui
 ```
 
+## Configuration
+
+Uses `@buzuli/color`, so its configuration options can be applied to optimize for your terminal (https://www.npmjs.com/package/@buzuli/color#configuration).
+
 ## Examples
 
 HTTP GET requet
