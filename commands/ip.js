@@ -44,8 +44,8 @@ function builder (yargs) {
     })
 }
 
-async function handler ({cli, cliPretty, geo, json, jsonPretty, raw, rawPretty}) {
-  const {blue, green, grey, orange, purple, red, yellow, emoji} = require('@buzuli/color')
+async function handler ({ cli, cliPretty, geo, json, jsonPretty, raw, rawPretty }) {
+  const { blue, green, grey, orange, purple, red, yellow, emoji } = require('@buzuli/color')
   const buzJson = require('@buzuli/json')
   const axios = require('axios')
 
@@ -53,7 +53,7 @@ async function handler ({cli, cliPretty, geo, json, jsonPretty, raw, rawPretty})
     return ((value === 'unknown') ? grey : preferredColor)(value)
   }
 
-  const {url, decode} = ipApi()
+  const { url, decode } = ipApi()
 
   const options = {
     method: 'GET',
@@ -62,7 +62,7 @@ async function handler ({cli, cliPretty, geo, json, jsonPretty, raw, rawPretty})
   }
 
   try {
-    const {status, data} = await axios(options)
+    const { status, data } = await axios(options)
 
     if (status === 200) {
       const record = decode(data)
@@ -94,9 +94,9 @@ async function handler ({cli, cliPretty, geo, json, jsonPretty, raw, rawPretty})
         console.log(`${green(ip)}${geoInfo}`)
       } else if (json || jsonPretty || raw || rawPretty) {
         if (jsonPretty || rawPretty) {
-          console.log(buzJson(rawPretty ? data : geo ? record : {ip}))
+          console.log(buzJson(rawPretty ? data : geo ? record : { ip }))
         } else {
-          console.log(JSON.stringify(raw ? data : geo ? record : {ip}))
+          console.log(JSON.stringify(raw ? data : geo ? record : { ip }))
         }
       } else {
         console.log(`IP Address : ${green(ip)}`)

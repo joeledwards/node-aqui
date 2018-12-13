@@ -1,5 +1,5 @@
-const {read: builder} = require('../lib/build')
-const {get: handler} = require('../lib/http')
+const { read: builder } = require('../lib/build')
+const { get: handler } = require('../lib/http')
 
 module.exports = {
   command: 'get <url>',
