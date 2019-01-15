@@ -9,7 +9,7 @@ function builder (yargs) {
   yargs
     .positional('filter', {
       type: 'string',
-      desc: 'regex filter for matches on the status and message',
+      desc: 'regex filter for matches on the status and message (implies --include-unofficial)',
       coerce: filter => new RegExp(filter, 'i')
     })
     .option('include-unofficial', {
@@ -33,7 +33,7 @@ function handler ({filter, includeUnofficial, onlyUnofficial}) {
 
   statusCodes()
     .filter(({unofficial}) => {
-      return onlyUnofficial ? unofficial : !unofficial || includeUnofficial
+      return filter || (onlyUnofficial ? unofficial : !unofficial || includeUnofficial)
     })
     .filter(({code, description}) => {
       return !filter || `${code}`.match(filter) || description.match(filter)
