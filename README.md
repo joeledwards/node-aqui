@@ -11,6 +11,10 @@ Simple CLI HTTP tools aimed at maximum human friendliness.
 $ npm i -g aqui
 ```
 
+## Configuration
+
+Uses `@buzuli/color`, so its configuration options can be applied to optimize for your terminal (https://www.npmjs.com/package/@buzuli/color#configuration).
+
 ## Examples
 
 HTTP GET requet
@@ -76,8 +80,7 @@ $ aqui ip -gJ
 
 ## Usage
 ```
-$ aqui --help
-aqui <command>
+$ aqui <command>
 
 Commands:
   aqui delete <url> [payload]  HTTP DELETE against a URL
@@ -87,11 +90,11 @@ Commands:
   aqui options <url>           HTTP OPTIONS against a URL
   aqui post <url> [payload]    HTTP POST against a URL
   aqui put <url> [payload]     HTTP PUT against a URL
+  aqui status-codes [filter]   list the http status codes
 
 Options:
   --version  Show version number                                       [boolean]
   --help     Show help                                                 [boolean]
-
 ```
 
 [travis-url]: https://travis-ci.org/joeledwards/node-aqui

@@ -1,5 +1,5 @@
-const {write: builder} = require('../lib/build')
-const {post: handler} = require('../lib/http')
+const { write: builder } = require('../lib/build')
+const { post: handler } = require('../lib/http')
 
 module.exports = {
   command: 'post <url> [payload]',

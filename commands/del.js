@@ -1,5 +1,5 @@
-const {write: builder} = require('../lib/build')
-const {del: handler} = require('../lib/http')
+const { write: builder } = require('../lib/build')
+const { del: handler } = require('../lib/http')
 
 module.exports = {
   command: 'delete <url> [payload]',
