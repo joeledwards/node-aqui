@@ -33,7 +33,7 @@ function handler ({ filter, includeUnofficial, onlyUnofficial }) {
   console.log(`HTTP Status Codes`)
 
   h.status.codes()
-    .filter(({unofficial}) => {
+    .filter(({ unofficial }) => {
       return filter || (onlyUnofficial ? unofficial : !unofficial || includeUnofficial)
     })
     .filter(({ code, description }) => {
