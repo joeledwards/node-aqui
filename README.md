@@ -13,7 +13,7 @@ $ npm i -g aqui
 
 ## Configuration
 
-Uses `@buzuli/color`, so its configuration options can be applied to optimize for your terminal (https://www.npmjs.com/package/@buzuli/color#configuration).
+Uses `@buzuli/color`, so its [configuration options](https://www.npmjs.com/package/@buzuli/color#configuration) can be applied to optimize for your terminal.
 
 ## Examples
 
