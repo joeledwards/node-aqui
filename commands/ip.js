@@ -120,7 +120,7 @@ async function handler ({ cli, cliPretty, geo, json, jsonPretty, raw, rawPretty 
     }
   } catch (error) {
     console.error(error)
-    console.error(red(emoji.inject(`Error checking IP address. Details above :point_up: `)))
+    console.error(red(emoji.inject('Error checking IP address. Details above :point_up: ')))
     process.exit(1)
   }
 

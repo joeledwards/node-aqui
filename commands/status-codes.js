@@ -30,7 +30,7 @@ function handler ({ filter, includeUnofficial, onlyUnofficial }) {
   const c = require('@buzuli/color')
   const h = require('@buzuli/http')
 
-  console.log(`HTTP Status Codes`)
+  console.log('HTTP Status Codes')
 
   h.status.codes()
     .filter(({ unofficial }) => {
