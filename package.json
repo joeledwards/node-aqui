@@ -27,17 +27,17 @@
   "dependencies": {
     "@buzuli/color": "^2.2.2",
     "@buzuli/hexdump": "^1.1.0",
-    "@buzuli/http": "^1.0.2",
-    "@buzuli/json": "^2.0.2",
-    "@buzuli/url": "^1.0.0",
-    "axios": "^0.19.0",
-    "durations": "^3.4.1",
-    "ramda": "^0.26.1",
-    "yargs": "^15.0.2"
+    "@buzuli/http": "^1.0.3",
+    "@buzuli/json": "^2.1.0",
+    "@buzuli/url": "^1.0.1",
+    "axios": "^0.20.0",
+    "durations": "^3.4.2",
+    "ramda": "^0.27.1",
+    "yargs": "^16.0.3"
   },
   "devDependencies": {
     "express": "^4.17.1",
-    "standard": "^14.3.1",
-    "tap": "^14.9.2"
+    "standard": "^14.3.4",
+    "tap": "^14.10.8"
   }
 }
