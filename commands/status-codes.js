@@ -27,7 +27,6 @@ function builder (yargs) {
 }
 
 function handler ({ filter, includeUnofficial, onlyUnofficial }) {
-  const c = require('@buzuli/color')
   const h = require('@buzuli/http')
 
   console.log('HTTP Status Codes')
@@ -43,5 +42,5 @@ function handler ({ filter, includeUnofficial, onlyUnofficial }) {
       console.log(`  ${h.status.color(code)} ${description} ${unofficial ? '❄️ ' : ''}`)
     })
 
-  console.log(`Source: ${c.blue(h.status.codesSource())}`)
+  console.log(`Source: ${h.url.color(h.status.codesSource())}`)
 }

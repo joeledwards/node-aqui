@@ -131,8 +131,8 @@ async function handler ({ cli, cliPretty, geo, json, jsonPretty, raw, rawPretty 
         ? red
         : status > 299
           ? purple
-            ? status > 199
-            : green
+              ? status > 199
+              : green
           : blue)(status)
   }
 }
