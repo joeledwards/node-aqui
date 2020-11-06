@@ -19,8 +19,14 @@
     "lint:fix": "standard --fix"
   },
   "keywords": [
-    "HTTP",
-    "REST"
+    "client",
+    "cli",
+    "command",
+    "curl",
+    "http",
+    "httpie",
+    "rest",
+    "wget"
   ],
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
@@ -37,7 +43,7 @@
   },
   "devDependencies": {
     "express": "^4.17.1",
-    "standard": "^15.0.1",
+    "standard": "^16.0.1",
     "tap": "^14.10.8"
   }
 }
