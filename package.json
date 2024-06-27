@@ -31,7 +31,7 @@
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@buzuli/color": "^2.2.2",
+    "@buzuli/color": "^2.3.2",
     "@buzuli/hexdump": "^1.1.0",
     "@buzuli/http": "^1.2.0",
     "@buzuli/json": "^2.1.0",
