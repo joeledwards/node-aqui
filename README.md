@@ -88,6 +88,7 @@ Commands:
   aqui head <url>              HTTP HEAD against a URL
   aqui ip                      Fetch public IP info for this caller
   aqui options <url>           HTTP OPTIONS against a URL
+  aqui patch <url> [payload]   HTTP PATCH against a URL
   aqui post <url> [payload]    HTTP POST against a URL
   aqui put <url> [payload]     HTTP PUT against a URL
   aqui status-codes [filter]   list the http status codes
