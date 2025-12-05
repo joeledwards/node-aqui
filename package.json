@@ -31,10 +31,10 @@
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@buzuli/color": "^2.3.2",
+    "@buzuli/color": "^2.4.1",
     "@buzuli/hexdump": "^1.1.0",
     "@buzuli/http": "^1.2.0",
-    "@buzuli/json": "^2.1.0",
+    "@buzuli/json": "^2.2.1",
     "@buzuli/url": "^1.0.1",
     "axios": "^0.21.0",
     "durations": "^3.4.2",
